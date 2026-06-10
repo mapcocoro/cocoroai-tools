@@ -54,6 +54,54 @@ export function clearDraftData(): void {
   }
 }
 
+// ---- 帳票種別ごとの下書きキー ----
+// 見積書は従来キー(cocoroai_tools_chouhyo_draft)を継続利用。
+// 請求書・領収書は帳票別キーに分離し、ツール間・タブ間でデータが混ざらないようにする
+function draftKeyFor(docType: DocumentType): string {
+  return docType === "estimate"
+    ? STORAGE_KEYS.DRAFT_DATA
+    : `${STORAGE_KEYS.DRAFT_DATA}_${docType}`;
+}
+
+/**
+ * 帳票種別ごとの下書きデータを保存
+ */
+export function saveDraftDataFor(docType: DocumentType, data: FormData): void {
+  try {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(draftKeyFor(docType), JSON.stringify(data));
+  } catch (error) {
+    console.error("Failed to save draft data:", error);
+  }
+}
+
+/**
+ * 帳票種別ごとの下書きデータを読み込み
+ */
+export function loadDraftDataFor(docType: DocumentType): FormData | null {
+  try {
+    if (typeof window === "undefined") return null;
+    const stored = localStorage.getItem(draftKeyFor(docType));
+    if (!stored) return null;
+    return JSON.parse(stored) as FormData;
+  } catch (error) {
+    console.error("Failed to load draft data:", error);
+    return null;
+  }
+}
+
+/**
+ * 帳票種別ごとの下書きデータを削除
+ */
+export function clearDraftDataFor(docType: DocumentType): void {
+  try {
+    if (typeof window === "undefined") return;
+    localStorage.removeItem(draftKeyFor(docType));
+  } catch (error) {
+    console.error("Failed to clear draft data:", error);
+  }
+}
+
 /**
  * 発行元（自社）情報のデフォルト設定を保存
  */
