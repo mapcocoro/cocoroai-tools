@@ -186,9 +186,14 @@ export default function CompressTool() {
           dragOver ? "border-teal bg-teal-softer" : "border-line bg-card"
         }`}
       >
-        <p className="text-3xl" aria-hidden>
-          🖼️
-        </p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/icons/tools/image-compress.png"
+          alt=""
+          width={56}
+          height={56}
+          className="mx-auto h-14 w-14"
+        />
         <p className="mt-2 text-sm font-bold text-ink">
           {items.length > 0
             ? `✅ ${items.length}枚 取り込み済み(タップでさらに追加)`
