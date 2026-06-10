@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ココロＡＩ合同会社「しごとの小道具」テーマ
+   カラーは自社HP(cocoroai-hp/tokens.css)の実値に統一 */
+:root {
+  /* ベース紙色 */
+  --paper: #fdfcfb;
+  --paper-2: #f7f4ee;
+  --cream: #f2eee5;
+
+  /* 墨色(文字) */
+  --ink: #0d2733;
+  --ink-deep: #061a23;
+  --ink-soft: #3c5463;
+  --ink-mute: #526a76;
+  --ink-line: #c8cfd3;
+
+  /* ティール深色(メインアクセント) */
+  --teal: #005b7b;
+  --teal-deep: #003f57;
+  --teal-mid: #2e7e95;
+  --teal-soft: #d7e4e9;
+  --teal-softer: #eaf0f2;
+
+  /* サブアクセント(ワンポイントのみ) */
+  --sun: #fccf27;
+  --sun-ink: #7a5a00;
+
+  --card: #ffffff;
+  --line: #e4e7e9;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-mute: var(--ink-mute);
+  --color-ink-line: var(--ink-line);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-teal-mid: var(--teal-mid);
+  --color-teal-soft: var(--teal-soft);
+  --color-teal-softer: var(--teal-softer);
+  --color-sun: var(--sun);
+  --color-sun-ink: var(--sun-ink);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --font-sans: var(--font-noto-sans-jp), -apple-system, "Hiragino Sans",
+    sans-serif;
+  --font-serif: var(--font-shippori), "Hiragino Mincho ProN", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* Tailwind v4はborder既定色がcurrentColor。v3移植部品のための互換シム */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--line);
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-noto-sans-jp), -apple-system, "Hiragino Sans",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* スマホで input zoom を防ぐ */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* スクロールバーを細く */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+/* ===== 印刷(帳票ツール共通) =====
+   画面には #print-area の元を表示し、印刷時はそれだけをA4に出す */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  #print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  /* 帳票専用クラス(ユーティリティ名に依存させない) */
+  .doc-section {
+    break-inside: avoid;
+  }
+  .doc-table tr {
+    break-inside: avoid;
+  }
+}
