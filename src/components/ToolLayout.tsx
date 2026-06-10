@@ -46,10 +46,19 @@ export default function ToolLayout({
           <p className="font-mono text-xs tracking-widest text-teal">
             FREE TOOL
           </p>
-          <h1 className="mt-1 font-serif text-2xl font-bold text-ink sm:text-3xl">
-            <span aria-hidden className="mr-2">
-              {tool.emoji}
-            </span>
+          <h1 className="mt-1 flex items-center gap-3 font-serif text-2xl font-bold text-ink sm:text-3xl">
+            {tool.icon ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={tool.icon}
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 shrink-0"
+              />
+            ) : (
+              <span aria-hidden>{tool.emoji}</span>
+            )}
             {tool.name}
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">

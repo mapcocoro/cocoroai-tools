@@ -28,6 +28,11 @@
 
   --card: #ffffff;
   --line: #e4e7e9;
+
+  /* ポップアクセント(旧サイトのアクア系) */
+  --aqua: #00a4c6;
+  --aqua-2: #00c6a9;
+  --aqua-soft: #e3f5f9;
 }
 
 @theme inline {
@@ -48,6 +53,9 @@
   --color-sun-ink: var(--sun-ink);
   --color-card: var(--card);
   --color-line: var(--line);
+  --color-aqua: var(--aqua);
+  --color-aqua-2: var(--aqua-2);
+  --color-aqua-soft: var(--aqua-soft);
   --font-sans: var(--font-noto-sans-jp), -apple-system, "Hiragino Sans",
     sans-serif;
   --font-serif: var(--font-shippori), "Hiragino Mincho ProN", serif;
@@ -76,6 +84,31 @@ input,
 textarea,
 select {
   font-size: 16px;
+}
+
+/* トップページのポップ要素 */
+.text-grad-aqua {
+  background: linear-gradient(135deg, var(--aqua), var(--aqua-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.floaty {
+  animation: floaty 4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .floaty {
+    animation: none;
+  }
 }
 
 /* スクロールバーを細く */
