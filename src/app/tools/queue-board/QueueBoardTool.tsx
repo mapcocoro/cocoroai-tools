@@ -305,7 +305,7 @@ export default function QueueBoardTool() {
             です
           </p>
           <p className="mt-1 text-xs text-ink-mute">
-            お呼びするまでお待ちください
+            お呼びするまでお待ちください。番号はスマホで撮っておくと安心です📷
           </p>
         </div>
       )}
@@ -413,6 +413,19 @@ export default function QueueBoardTool() {
         >
           リセット(番号を1にもどす)
         </button>
+      </section>
+      <section className="rounded-2xl border border-line bg-paper-2 p-5">
+        <h2 className="text-sm font-bold text-ink">つかいどころ(正直なご案内)</h2>
+        <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+          このボードは紙の番号札を出さない仕組みのため、
+          <strong>待ち人数が少ない場面(目安10人まで)</strong>
+          に向いています。整骨院・サロンの順番整理、イベントの相談ブース、店頭の混雑時など。
+          お呼びした際は「○番のお客様ですね?」とひとこと確認すると、番号の聞き違いを防げます。
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+          待ちが多いお店や、呼び間違いを確実に防ぎたい場合は、紙の番号札(発券機連携)や
+          「お客様のLINEに番号と呼び出しを通知する方式」が確実です。下のカスタム相談からどうぞ。
+        </p>
       </section>
       <p className="text-[11px] leading-relaxed text-ink-mute">
         ※受付の状況はこの端末の中にだけ保存されます。ページを閉じても消えません。
