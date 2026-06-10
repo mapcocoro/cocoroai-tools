@@ -1,0 +1,22 @@
+{
+  "name": "損益分岐点かんたん計算",
+  "short_name": "損益分岐点かんた",
+  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "start_url": "/tools/break-even/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFCFB",
+  "theme_color": "#005B7B",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

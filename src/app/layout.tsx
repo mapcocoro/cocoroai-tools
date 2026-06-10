@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_JP, Shippori_Mincho_B1, IBM_Plex_Mono } from "next/font/google";
+import SwRegister from "@/components/SwRegister";
 import "./globals.css";
 
 const notoSansJp = Noto_Sans_JP({
@@ -31,6 +32,9 @@ export const metadata: Metadata = {
   description:
     "見積書・請求書・QRコード・写真圧縮・順番待ちボードなど、小さな会社とお店のための無料ミニツール集。登録不要・ブラウザだけで使えます。ココロＡＩ合同会社が運営。",
   manifest: "/manifest.webmanifest",
+  icons: {
+    apple: "/icons/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -47,6 +51,7 @@ export default function RootLayout({
       <body
         className={`${notoSansJp.variable} ${shippori.variable} ${plexMono.variable} antialiased`}
       >
+        <SwRegister />
         {children}
       </body>
     </html>
