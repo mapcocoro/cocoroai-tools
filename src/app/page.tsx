@@ -61,7 +61,7 @@ export default function Home() {
           </div>
           <div className="relative shrink-0">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 sm:-left-24 sm:translate-x-0 sm:top-2">
-              <span className="inline-block rounded-2xl rounded-bl-sm bg-white px-4 py-2 text-xs font-bold text-teal shadow-sm">
+              <span className="inline-block whitespace-nowrap rounded-2xl rounded-bl-sm bg-white px-4 py-2 text-xs font-bold text-teal shadow-sm">
                 つかってみてね!
               </span>
             </div>
