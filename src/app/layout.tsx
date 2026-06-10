@@ -25,6 +25,17 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cocoroai-tools.pages.dev"), // ドメイン確定後に tools.cocoroai.co.jp へ
+  openGraph: {
+    siteName: "しごとの小道具 by ココロAI",
+    locale: "ja_JP",
+    type: "website",
+    images: [{ url: "/og/site.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og/site.png"],
+  },
   title: {
     default: "しごとの小道具 by ココロAI | 無料で使える業務ミニツール集",
     template: "%s | しごとの小道具 by ココロAI",
