@@ -118,3 +118,45 @@ select {
     break-inside: avoid;
   }
 }
+
+/* ===== 帳票ドキュメント(かんたん見積書ほか) =====
+   移植元kantan-chouhyoの印刷CSSはTailwindユーティリティ名セレクタに
+   依存していたため、専用クラス(.doc-root / .doc-row / .doc-rule-*)へ付け替え */
+.doc-root {
+  font-feature-settings: "palt" 1, "tnum" 1;
+}
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+.prose-jp {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media print {
+  .doc-root {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #000;
+    background: #fff !important;
+  }
+  .doc-root * {
+    box-shadow: none !important;
+  }
+  /* 明細行の途中改ページ禁止 */
+  .doc-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  /* 罫線は印刷時に細く統一 */
+  .doc-rule-b {
+    border-bottom: 0.5px solid #475569 !important;
+  }
+  .doc-rule-t {
+    border-top: 0.5px solid #475569 !important;
+  }
+  /* 画面用の横スクロールを解除してA4全面に */
+  #print-area {
+    overflow: visible !important;
+  }
+}
