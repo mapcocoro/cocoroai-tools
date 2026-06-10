@@ -140,6 +140,14 @@ select {
     color: #000;
     background: #fff !important;
   }
+  /* 色背景のまま印刷したい帳票(料金表「やわらか」等)。
+     背景色は各コンポーネントが --doc-keep-bg で指定する */
+  .doc-root.doc-keep-bg {
+    background: var(--doc-keep-bg, #fff) !important;
+    color: inherit;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
   .doc-root * {
     box-shadow: none !important;
   }
