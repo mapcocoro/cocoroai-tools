@@ -8,23 +8,6 @@ export interface CalcResult {
   grandTotal: number;
 }
 
-export function calculateTotals(items: Item[]): CalcResult {
-  const subTotal = items.reduce((acc, item) => {
-    return acc + item.qty * item.unitPrice;
-  }, 0);
-
-  const taxTotal = items.reduce((acc, item) => {
-    const lineTotal = item.qty * item.unitPrice;
-    return acc + Math.round((lineTotal * item.taxRate) / 100);
-  }, 0);
-
-  return {
-    subTotal,
-    taxTotal,
-    grandTotal: subTotal + taxTotal,
-  };
-}
-
 // 税率別内訳(インボイス対応: 税率ごとの対象額と消費税額)
 export interface TaxBreakdownEntry {
   rate: number;
@@ -32,20 +15,38 @@ export interface TaxBreakdownEntry {
   tax: number;
 }
 
+/**
+ * インボイス制度の端数処理要件:
+ * 消費税額の端数処理は「一の適格請求書につき、税率ごとに1回」(国税庁インボイスQ&A 問57)。
+ * 明細行ごとに丸めて合算する方式は認められないため、
+ * 税率ごとに対象額を合計してから1回だけ丸める。
+ */
 export function calculateTaxBreakdown(items: Item[]): TaxBreakdownEntry[] {
-  const map = new Map<number, { taxable: number; tax: number }>();
+  const taxableByRate = new Map<number, number>();
   for (const item of items) {
     const lineTotal = item.qty * item.unitPrice;
     const rate = item.taxRate ?? 10;
-    const entry = map.get(rate) ?? { taxable: 0, tax: 0 };
-    entry.taxable += lineTotal;
-    // calculateTotals と同じ「明細行ごとに丸め」で合算し、合計表示と必ず一致させる
-    entry.tax += Math.round((lineTotal * rate) / 100);
-    map.set(rate, entry);
+    taxableByRate.set(rate, (taxableByRate.get(rate) ?? 0) + lineTotal);
   }
-  return [...map.entries()]
+  return [...taxableByRate.entries()]
     .sort((a, b) => b[0] - a[0])
-    .map(([rate, v]) => ({ rate, taxable: v.taxable, tax: v.tax }));
+    .map(([rate, taxable]) => ({
+      rate,
+      taxable,
+      tax: Math.round((taxable * rate) / 100),
+    }));
+}
+
+export function calculateTotals(items: Item[]): CalcResult {
+  // 合計は税率別内訳から導出し、内訳表示と必ず一致させる
+  const breakdown = calculateTaxBreakdown(items);
+  const subTotal = breakdown.reduce((acc, e) => acc + e.taxable, 0);
+  const taxTotal = breakdown.reduce((acc, e) => acc + e.tax, 0);
+  return {
+    subTotal,
+    taxTotal,
+    grandTotal: subTotal + taxTotal,
+  };
 }
 
 export function formatCurrency(amount: number | undefined | null): string {
