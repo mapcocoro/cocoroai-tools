@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
     title: "本サイトについて",
-    body: "「しごとの小道具」は、ココロＡＩ合同会社(千葉県印西市)が無料で提供する業務ミニツール集です。どなたでも、登録なしでご利用いただけます。",
+    body: "「しごとの小道具」は、ココロＡＩ合同会社が無料で提供する業務ミニツール集です。どなたでも、登録なしでご利用いただけます。",
   },
   {
     title: "データの取り扱い(重要)",

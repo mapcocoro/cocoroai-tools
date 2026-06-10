@@ -241,7 +241,6 @@ export default function Home() {
           >
             ココロＡＩ合同会社
           </a>
-          (千葉県印西市)
         </p>
         <p className="mt-2 text-xs text-ink-mute">
           <Link href="/legal/" className="underline-offset-4 hover:underline">

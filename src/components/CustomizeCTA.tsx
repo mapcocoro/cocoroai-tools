@@ -33,7 +33,7 @@ export default function CustomizeCTA({ tool }: { tool: ToolMeta }) {
         カスタムの相談をしてみる(無料)
       </a>
       <p className="mt-3 text-xs text-ink-mute">
-        ココロＡＩ合同会社(千葉県印西市)が運営しています。
+        ココロＡＩ合同会社が運営しています。
       </p>
     </section>
   );
