@@ -1,7 +1,7 @@
 {
   "name": "かんたん見積書",
-  "short_name": "かんたん見積書",
-  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "short_name": "見積書",
+  "description": "ブラウザだけで見積書作成。インボイス対応・無料",
   "start_url": "/tools/estimate/",
   "scope": "/",
   "display": "standalone",

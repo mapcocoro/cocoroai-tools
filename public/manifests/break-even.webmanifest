@@ -1,7 +1,7 @@
 {
   "name": "損益分岐点かんたん計算",
-  "short_name": "損益分岐点かんた",
-  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "short_name": "損益分岐点",
+  "description": "いくら売れば黒字かをグラフで確認・無料",
   "start_url": "/tools/break-even/",
   "scope": "/",
   "display": "standalone",

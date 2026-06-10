@@ -1,7 +1,7 @@
 {
   "name": "請求書・領収書メーカー",
-  "short_name": "請求書・領収書メ",
-  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "short_name": "請求・領収書",
+  "description": "インボイス対応の請求書・領収書を作成・無料",
   "start_url": "/tools/invoice-receipt/",
   "scope": "/",
   "display": "standalone",

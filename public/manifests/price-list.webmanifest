@@ -1,7 +1,7 @@
 {
   "name": "料金表・メニュー表メーカー",
-  "short_name": "料金表・メニュー",
-  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "short_name": "料金表",
+  "description": "店頭に置けるA4料金表をブラウザで作成・無料",
   "start_url": "/tools/price-list/",
   "scope": "/",
   "display": "standalone",

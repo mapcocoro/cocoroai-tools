@@ -1,7 +1,7 @@
 {
   "name": "順番待ち受付ボード",
-  "short_name": "順番待ち受付ボー",
-  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "short_name": "順番待ち",
+  "description": "タブレット1台で受付番号の発行と呼び出し表示・無料",
   "start_url": "/tools/queue-board/",
   "scope": "/",
   "display": "standalone",

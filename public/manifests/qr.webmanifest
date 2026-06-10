@@ -1,7 +1,7 @@
 {
   "name": "QRコードかんたん作成",
-  "short_name": "QRコードかんた",
-  "description": "小さな会社とお店のための無料業務ミニツール集",
+  "short_name": "QR作成",
+  "description": "URLを入れるだけでQRコード作成。ロゴ入り対応・無料",
   "start_url": "/tools/qr/",
   "scope": "/",
   "display": "standalone",

@@ -9,21 +9,41 @@ export default function FeedbackForm({ tool }: { tool: ToolMeta }) {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState(""); // ハニーポット
-  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [state, setState] = useState<
+    "idle" | "sending" | "sent" | "mailto"
+  >("idle");
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || state === "sending") return;
     setState("sending");
-    await sendFeedback({ tool: tool.id, message: message.trim(), name, company });
-    setState("done");
+    const result = await sendFeedback({
+      tool: tool.id,
+      message: message.trim(),
+      name,
+      company,
+    });
+    setState(result);
   };
 
-  if (state === "done") {
+  if (state === "sent") {
     return (
       <section className="no-print rounded-2xl border border-line bg-card p-6 text-center">
         <p className="text-sm font-bold text-teal">
           ありがとうございます!いただいた声は次の改善に活かします。
+        </p>
+      </section>
+    );
+  }
+
+  if (state === "mailto") {
+    return (
+      <section className="no-print rounded-2xl border border-line bg-card p-6 text-center">
+        <p className="text-sm font-bold text-teal">
+          メールソフトが開きます。そのまま送信してください。
+        </p>
+        <p className="mt-2 text-xs text-ink-mute">
+          開かない場合は info@cocoroai.co.jp 宛てに直接お送りください。
         </p>
       </section>
     );

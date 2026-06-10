@@ -26,8 +26,10 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cocoroai-tools.pages.dev"), // ドメイン確定後に tools.cocoroai.co.jp へ
+  alternates: { canonical: "/" },
   openGraph: {
     siteName: "しごとの小道具 by ココロAI",
+    url: "/",
     locale: "ja_JP",
     type: "website",
     images: [{ url: "/og/site.png", width: 1200, height: 630 }],
