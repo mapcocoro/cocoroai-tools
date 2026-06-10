@@ -139,8 +139,8 @@ export default function Home() {
           {[
             {
               icon: "/icons/co/icon-co-chat.png",
-              name: "ここロボちゃん",
-              desc: "HPに設置するAIチャットボット。質問に24時間自動でお答え。会社HPの右下で体験できます。",
+              name: "AIチャットボット(ここロボちゃん)",
+              desc: "ホームページに設置して、お客様の質問に24時間自動でお答え。会社HPの右下で体験できます。",
               href: "https://www.cocoroai.co.jp/",
             },
             {
