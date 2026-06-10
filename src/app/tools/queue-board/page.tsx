@@ -1,6 +1,7 @@
 import ToolLayout from "@/components/ToolLayout";
 import { toolMetadata } from "@/lib/seo";
 import { getTool } from "@/lib/tools";
+import QueueBoardTool from "./QueueBoardTool";
 
 const tool = getTool("queue-board");
 export const metadata = toolMetadata(tool);
@@ -8,9 +9,7 @@ export const metadata = toolMetadata(tool);
 export default function Page() {
   return (
     <ToolLayout toolId="queue-board">
-      <div className="rounded-2xl border border-dashed border-line bg-card p-10 text-center text-sm text-ink-mute">
-        ただいま準備中です。もうすぐ使えるようになります!
-      </div>
+      <QueueBoardTool />
     </ToolLayout>
   );
 }

@@ -133,6 +133,43 @@ select {
   word-break: break-word;
 }
 
+/* ===== 順番待ち受付ボード =====
+   呼び出し番号が変わった時のアニメーション。
+   待合室で目を引きつつ点滅しすぎない上品なもの(ふわっと拡大+ひかえめな金色の残光) */
+@keyframes qb-call-in {
+  0% {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+  45% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes qb-call-glow {
+  0%,
+  100% {
+    text-shadow: none;
+  }
+  35% {
+    text-shadow: 0 0 0.35em rgba(252, 207, 39, 0.45);
+  }
+}
+.qb-call-anim {
+  animation:
+    qb-call-in 0.7s ease-out,
+    qb-call-glow 2.2s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .qb-call-anim {
+    animation: none;
+  }
+}
+
 @media print {
   .doc-root {
     font-size: 13px;
