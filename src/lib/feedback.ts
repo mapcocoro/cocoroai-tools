@@ -1,7 +1,7 @@
 import { CONTACT_EMAIL } from "./tools";
 
 const FEEDBACK_ENDPOINT =
-  "https://cocoroai-contact.map-cocoro.workers.dev/api/contact";
+  "https://cocoroai-contact.map-cocoro.workers.dev/api/tool-feedback";
 
 export interface FeedbackPayload {
   tool: string;
@@ -26,12 +26,11 @@ export async function sendFeedback(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        inquiryType: "ツール要望",
-        feedbackType: "tool_feedback",
         tool: payload.tool,
-        name: payload.name || "(未記入)",
+        name: payload.name || "",
         email: payload.email || "",
         message: payload.message,
+        company: payload.company || "",
       }),
     });
     if (!res.ok) throw new Error(`status ${res.status}`);
