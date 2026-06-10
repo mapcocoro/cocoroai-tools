@@ -10,15 +10,22 @@ const COLORS = [
   { label: "ブラウン", value: "#5c4033" },
 ] as const;
 
+const LOGO_SIZES = [
+  { label: "小", value: 0.2 },
+  { label: "中", value: 0.28 },
+  { label: "大", value: 0.35 },
+] as const;
+
 /** QRキャンバスの中央にロゴを白縁付きで描く */
 function drawLogo(
   canvas: HTMLCanvasElement,
   logo: HTMLImageElement,
-  size: number
+  size: number,
+  scale: number
 ) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
-  const logoSize = size * 0.22;
+  const logoSize = size * scale;
   const pad = logoSize * 0.12;
   const x = (size - logoSize) / 2;
   // 白の角丸下地(コントラスト確保)
@@ -46,6 +53,7 @@ export default function QrTool() {
   const [text, setText] = useState("");
   const [color, setColor] = useState<string>(COLORS[0].value);
   const [logo, setLogo] = useState<HTMLImageElement | null>(null);
+  const [logoScale, setLogoScale] = useState<number>(0.28);
   const [error, setError] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -68,11 +76,11 @@ export default function QrTool() {
       color: { dark: color, light: "#FFFFFF" },
     })
       .then(() => {
-        if (logo) drawLogo(canvas, logo, 280);
+        if (logo) drawLogo(canvas, logo, 280, logoScale);
         setError("");
       })
       .catch(() => setError("文字数が多すぎます。短くしてみてください。"));
-  }, [value, color, logo, ecLevel]);
+  }, [value, color, logo, ecLevel, logoScale]);
 
   const onLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -96,12 +104,12 @@ export default function QrTool() {
       errorCorrectionLevel: ecLevel,
       color: { dark: color, light: "#FFFFFF" },
     });
-    if (logo) drawLogo(off, logo, SIZE);
+    if (logo) drawLogo(off, logo, SIZE, logoScale);
     const a = document.createElement("a");
     a.href = off.toDataURL("image/png");
     a.download = "qrcode.png";
     a.click();
-  }, [value, color, logo, ecLevel]);
+  }, [value, color, logo, ecLevel, logoScale]);
 
   const downloadSvg = useCallback(async () => {
     if (!value) return;
@@ -116,7 +124,7 @@ export default function QrTool() {
       const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
       const vb = m ? Number(m[1]) : 0;
       if (vb > 0) {
-        const logoSize = vb * 0.22;
+        const logoSize = vb * logoScale;
         const pad = logoSize * 0.12;
         const bx = (vb - logoSize) / 2 - pad;
         const bs = logoSize + pad * 2;
@@ -138,7 +146,7 @@ export default function QrTool() {
     a.download = "qrcode.svg";
     a.click();
     URL.revokeObjectURL(url);
-  }, [value, color, logo, ecLevel]);
+  }, [value, color, logo, ecLevel, logoScale]);
 
   return (
     <div className="grid gap-6 sm:grid-cols-2">
@@ -203,9 +211,36 @@ export default function QrTool() {
               </button>
             )}
           </div>
+          {logo && (
+            <div className="mt-3">
+              <span className="text-xs font-bold text-ink">ロゴの大きさ</span>
+              <div className="mt-1 flex gap-2">
+                {LOGO_SIZES.map((s) => (
+                  <button
+                    key={s.value}
+                    type="button"
+                    onClick={() => setLogoScale(s.value)}
+                    className={`rounded-full px-4 py-1.5 text-xs font-bold transition ${
+                      logoScale === s.value
+                        ? "bg-teal text-white"
+                        : "border border-line bg-card text-ink-soft hover:border-teal"
+                    }`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <p className="mt-2 text-xs text-ink-mute">
             ロゴを入れると自動で「読み取りに強いQR」に切り替わります。
-            保存後は必ず一度読み取りテストをしてください。
+            {logoScale >= 0.35 && logo ? (
+              <span className="font-bold text-sun-ink">
+            「大」は読み取りの余裕が少なくなります。保存後の読み取りテストを必ず行ってください。
+              </span>
+            ) : (
+              "保存後は必ず一度読み取りテストをしてください。"
+            )}
           </p>
         </div>
 

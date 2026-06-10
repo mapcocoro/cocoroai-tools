@@ -71,12 +71,28 @@ export default function CompressTool() {
   const [maxWidth, setMaxWidth] = useState<number>(1600);
   const [quality, setQuality] = useState(0.78);
   const [dragOver, setDragOver] = useState(false);
+  const [notice, setNotice] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<Item[]>([]);
+  itemsRef.current = items;
 
   const process = useCallback(
     async (files: File[]) => {
-      const newItems: Item[] = files
-        .filter((f) => f.type.startsWith("image/"))
+      const existing = new Set(
+        itemsRef.current.map((i) => `${i.name}-${i.origSize}`)
+      );
+      const images = files.filter((f) => f.type.startsWith("image/"));
+      const fresh = images.filter((f) => !existing.has(`${f.name}-${f.size}`));
+      const skipped = images.length - fresh.length;
+      if (skipped > 0) {
+        setNotice(
+          `${skipped}枚は取り込み済みだったのでスキップしました(下に結果があります)`
+        );
+      } else if (fresh.length > 0) {
+        setNotice("");
+      }
+      const newItems: Item[] = fresh
         .map((f) => ({
           id: `${f.name}-${f.size}-${Math.floor(performance.now() * 1000)}`,
           file: f,
@@ -89,6 +105,10 @@ export default function CompressTool() {
         }));
       if (!newItems.length) return;
       setItems((prev) => [...prev, ...newItems]);
+      // 取り込まれたことが分かるように結果一覧へスクロール
+      setTimeout(() => {
+        listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
       for (const item of newItems) {
         try {
           const { blob, outName } = await compress(item.file, maxWidth, quality);
@@ -170,7 +190,9 @@ export default function CompressTool() {
           🖼️
         </p>
         <p className="mt-2 text-sm font-bold text-ink">
-          ここに写真をドラッグ、またはタップして選択
+          {items.length > 0
+            ? `✅ ${items.length}枚 取り込み済み(タップでさらに追加)`
+            : "ここに写真をドラッグ、またはタップして選択"}
         </p>
         <p className="mt-1 text-xs text-ink-mute">
           複数枚OK。写真は端末の外に送信されません
@@ -187,6 +209,12 @@ export default function CompressTool() {
           className="hidden"
         />
       </div>
+
+      {notice && (
+        <p className="rounded-xl bg-sun/20 px-4 py-3 text-sm font-bold text-sun-ink">
+          {notice}
+        </p>
+      )}
 
       <div className="grid gap-4 rounded-2xl border border-line bg-card p-5 sm:grid-cols-2">
         <label className="block">
@@ -222,22 +250,37 @@ export default function CompressTool() {
       </div>
 
       {items.length > 0 && (
-        <div className="space-y-3">
-          {doneItems.length > 1 && (
-            <div className="flex items-center justify-between rounded-xl bg-teal-softer p-4">
+        <div ref={listRef} className="scroll-mt-4 space-y-3">
+          {doneItems.length > 0 && (
+            <div className="flex items-center justify-between gap-2 rounded-xl bg-teal-softer p-4">
               <p className="text-sm font-bold text-ink">
                 合計 {fmtSize(totalBefore)} → {fmtSize(totalAfter)}
                 <span className="ml-2 text-teal">
                   ({Math.round((1 - totalAfter / totalBefore) * 100)}%削減)
                 </span>
               </p>
-              <button
-                type="button"
-                onClick={downloadAll}
-                className="rounded-full bg-teal px-5 py-2 text-xs font-bold text-white transition hover:bg-teal-deep"
-              >
-                まとめて保存
-              </button>
+              <div className="flex shrink-0 items-center gap-2">
+                {doneItems.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={downloadAll}
+                    className="rounded-full bg-teal px-5 py-2 text-xs font-bold text-white transition hover:bg-teal-deep"
+                  >
+                    まとめて保存
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    items.forEach((i) => i.url && URL.revokeObjectURL(i.url));
+                    setItems([]);
+                    setNotice("");
+                  }}
+                  className="rounded-full border border-line px-4 py-2 text-xs font-bold text-ink-soft transition hover:border-teal hover:text-teal"
+                >
+                  全部クリア
+                </button>
+              </div>
             </div>
           )}
           <ul className="space-y-2">
