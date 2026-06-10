@@ -24,11 +24,15 @@ function drawLogo(
   // 白の角丸下地(コントラスト確保)
   const bx = x - pad;
   const bs = logoSize + pad * 2;
-  const r = bs * 0.18;
-  ctx.beginPath();
-  ctx.roundRect(bx, bx, bs, bs, r);
   ctx.fillStyle = "#FFFFFF";
-  ctx.fill();
+  if (typeof ctx.roundRect === "function") {
+    ctx.beginPath();
+    ctx.roundRect(bx, bx, bs, bs, bs * 0.18);
+    ctx.fill();
+  } else {
+    // 旧Safari等roundRect未対応ブラウザ
+    ctx.fillRect(bx, bx, bs, bs);
+  }
   // ロゴ(縦横比維持で中央に収める)
   const ratio = logo.width / logo.height;
   let w = logoSize;
