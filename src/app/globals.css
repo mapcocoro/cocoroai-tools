@@ -60,6 +60,7 @@
     sans-serif;
   --font-serif: var(--font-shippori), "Hiragino Mincho ProN", serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-hand: var(--font-yomogi), "Hiragino Maru Gothic ProN", sans-serif;
 }
 
 /* Tailwind v4はborder既定色がcurrentColor。v3移植部品のための互換シム */

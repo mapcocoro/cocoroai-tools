@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_JP, Shippori_Mincho_B1, IBM_Plex_Mono } from "next/font/google";
+import {
+  Noto_Sans_JP,
+  Shippori_Mincho_B1,
+  IBM_Plex_Mono,
+  Yomogi,
+} from "next/font/google";
 import SwRegister from "@/components/SwRegister";
 import "./globals.css";
 
@@ -21,6 +26,13 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-plex-mono",
+  display: "swap",
+});
+
+const yomogi = Yomogi({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-yomogi",
   display: "swap",
 });
 
@@ -62,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${notoSansJp.variable} ${shippori.variable} ${plexMono.variable} antialiased`}
+        className={`${notoSansJp.variable} ${shippori.variable} ${plexMono.variable} ${yomogi.variable} antialiased`}
       >
         <SwRegister />
         {children}

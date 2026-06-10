@@ -51,7 +51,7 @@ export default function Home() {
                 (chip) => (
                   <span
                     key={chip}
-                    className="rounded-full bg-aqua-soft px-4 py-1.5 text-xs font-bold text-teal"
+                    className="font-hand rounded-full bg-aqua-soft px-4 py-1.5 text-sm font-bold text-teal"
                   >
                     {chip}
                   </span>
@@ -61,7 +61,7 @@ export default function Home() {
           </div>
           <div className="relative shrink-0">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 sm:-left-24 sm:translate-x-0 sm:top-2">
-              <span className="inline-block whitespace-nowrap rounded-2xl rounded-bl-sm bg-white px-4 py-2 text-xs font-bold text-teal shadow-sm">
+              <span className="font-hand inline-block whitespace-nowrap rounded-2xl rounded-bl-sm bg-white px-4 py-2 text-sm font-bold text-teal shadow-sm">
                 つかってみてね!
               </span>
             </div>
