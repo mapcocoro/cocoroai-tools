@@ -86,6 +86,10 @@ export default function ToolLayout({
           >
             ココロＡＩ合同会社
           </a>
+          {" ・ "}
+          <Link href="/legal/" className="underline-offset-4 hover:underline">
+            ご利用にあたって
+          </Link>
         </p>
       </footer>
     </div>

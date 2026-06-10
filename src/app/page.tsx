@@ -138,6 +138,76 @@ export default function Home() {
           )}
         </div>
 
+        <section className="mt-12">
+          <h2 className="text-center font-mono text-xs tracking-[0.3em] text-ink-mute">
+            CO. SERIES
+          </h2>
+          <p className="mt-2 text-center font-serif text-lg font-bold text-ink">
+            おなじみの道具たちも、仲間です
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {[
+              {
+                icon: "/icons/co/icon-co-chat.png",
+                label: "AI CHAT",
+                name: "ここロボちゃん",
+                desc: "HPに設置するAIチャットボット。会社HPの右下で体験できます。",
+                href: "https://www.cocoroai.co.jp/",
+                cta: "会社HPで体験する",
+              },
+              {
+                icon: "/icons/co/icon-co-time.png",
+                label: "SCHEDULING",
+                name: "Co.Time",
+                desc: "URLを送るだけで予定調整。Googleカレンダー連携。",
+                href: "https://cotime.cocoroai.co.jp",
+                cta: "Co.Timeを見る",
+              },
+              {
+                icon: "/icons/co/icon-co-link.png",
+                label: "CONTACT FORM",
+                name: "Co.Link",
+                desc: "シンプルで安全なお問い合わせフォーム。",
+                href: CONTACT_URL,
+                cta: "Co.Linkを見る",
+              },
+            ].map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-2xl border border-line bg-card p-5 transition hover:-translate-y-0.5 hover:border-aqua hover:shadow-md"
+              >
+                <div className="flex items-center gap-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.icon}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 shrink-0"
+                  />
+                  <div>
+                    <p className="font-mono text-[10px] tracking-widest text-ink-mute">
+                      {item.label}
+                    </p>
+                    <h3 className="font-serif text-base font-bold text-ink group-hover:text-teal">
+                      {item.name}
+                    </h3>
+                  </div>
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-ink-soft">
+                  {item.desc}
+                </p>
+                <p className="mt-3 text-right font-mono text-[10px] tracking-widest text-aqua opacity-0 transition group-hover:opacity-100">
+                  {item.cta} →
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+
         <section
           className="mt-12 rounded-2xl p-8 text-center sm:p-10"
           style={{
@@ -172,6 +242,11 @@ export default function Home() {
             ココロＡＩ合同会社
           </a>
           (千葉県印西市)
+        </p>
+        <p className="mt-2 text-xs text-ink-mute">
+          <Link href="/legal/" className="underline-offset-4 hover:underline">
+            ご利用にあたって(免責事項)
+          </Link>
         </p>
       </footer>
     </div>
