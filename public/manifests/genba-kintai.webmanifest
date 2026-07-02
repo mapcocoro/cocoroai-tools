@@ -1,0 +1,14 @@
+{
+  "name": "げんば勤怠",
+  "short_name": "勤怠",
+  "description": "タップで出退勤・現場ごとに記録。端末内保存・無料",
+  "start_url": "/tools/genba-kintai/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFCFB",
+  "theme_color": "#005B7B",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

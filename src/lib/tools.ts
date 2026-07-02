@@ -5,7 +5,8 @@ export type ToolId =
   | "estimate"
   | "invoice-receipt"
   | "price-list"
-  | "queue-board";
+  | "queue-board"
+  | "genba-kintai";
 
 export interface ToolMeta {
   id: ToolId;
@@ -142,6 +143,22 @@ export const TOOLS: ToolMeta[] = [
       "お客様のLINEに「もうすぐ順番です」と自動通知",
       "受付・厨房・フロアなど複数端末でのリアルタイム共有",
       "受付フォームと連携した事前受付システム",
+    ],
+    released: true,
+  },
+  {
+    id: "genba-kintai",
+    name: "げんば勤怠",
+    seoTitle: "げんば勤怠(無料・打刻・現場ごと集計・CSV出力)",
+    description:
+      "タップで出退勤・休憩を記録。現場ごとに集計してCSV出力。夜勤対応・端末内保存・オフラインOK。",
+    lead: "現場で働く方が、自分の労働時間を記録するためのアプリです。大きなボタンで出退勤・休憩を打刻し、現場ごとに時間を集計。夜勤(日をまたぐ勤務)にも対応し、CSVで書き出せます。位置情報を使うと現場を自動で判定できます(在宅ならオフに)。記録はこの端末の中だけに保存され、外部に送信されません。",
+    emoji: "⏱️",
+    icon: "/icons/tools/genba-kintai.png",
+    customizeExamples: [
+      "複数の従業員をまとめて管理する会社向けクラウド勤怠",
+      "給与計算ソフト・請求書ツールへの自動連携",
+      "打刻データから日報・現場別の原価集計を自動作成",
     ],
     released: true,
   },
