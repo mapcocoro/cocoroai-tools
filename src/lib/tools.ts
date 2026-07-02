@@ -156,9 +156,9 @@ export const TOOLS: ToolMeta[] = [
     emoji: "⏱️",
     icon: "/icons/tools/genba-kintai.png",
     customizeExamples: [
+      "出勤・退勤を管理者にメールやLINEでお知らせ（会社での導入向け）",
       "複数の従業員をまとめて管理する会社向けクラウド勤怠",
-      "給与計算ソフト・請求書ツールへの自動連携",
-      "打刻データから日報・現場別の原価集計を自動作成",
+      "給与・請求ソフトに取り込めるCSVの書き出し（項目カスタム）",
     ],
     released: true,
   },
