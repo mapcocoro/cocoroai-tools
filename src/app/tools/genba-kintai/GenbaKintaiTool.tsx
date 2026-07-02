@@ -492,11 +492,27 @@ export default function GenbaKintaiTool() {
             <button
               type="button"
               onClick={active ? clockOut : clockIn}
-              className={`mt-4 flex w-full items-center justify-center gap-3 rounded-2xl py-6 font-serif text-2xl font-bold tracking-widest text-white shadow-md transition active:scale-[0.99] ${
-                active ? "bg-[#c0522f] hover:bg-[#9c3f22]" : "bg-teal hover:bg-teal-deep"
+              className={`mt-4 flex w-full items-center justify-center gap-3.5 rounded-2xl py-6 text-[26px] font-bold tracking-[0.18em] text-white shadow-lg ring-1 transition active:scale-[0.98] ${
+                active
+                  ? "bg-gradient-to-b from-[#ff8a63] to-[#e0562f] ring-[#c9481f]/30 hover:brightness-105"
+                  : "bg-gradient-to-b from-[#12a0c6] to-[#00617f] ring-[#004a63]/30 hover:brightness-105"
               }`}
             >
-              <span className={`inline-block h-4 w-4 rounded-full ${active ? "bg-white" : "bg-white"}`} />
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+                {active ? (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <path d="m16 17 5-5-5-5" />
+                    <path d="M21 12H9" />
+                  </svg>
+                ) : (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    <path d="m10 17 5-5-5-5" />
+                    <path d="M15 12H3" />
+                  </svg>
+                )}
+              </span>
               {active ? "退勤" : "出勤"}
             </button>
             <div className="mt-3 flex gap-3">
