@@ -1,0 +1,22 @@
+{
+  "name": "多言語メニューメーカー",
+  "short_name": "多言語メニュー",
+  "description": "英語・中国語・韓国語つきのメニュー表・料金表をブラウザで作成・無料",
+  "start_url": "/tools/multilingual-menu/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFCFB",
+  "theme_color": "#005B7B",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

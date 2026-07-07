@@ -64,6 +64,24 @@ export default function ToolLayout({
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
             {tool.lead}
           </p>
+
+          {tool.usageSteps && (
+            <div className="mt-5 rounded-2xl border border-teal/25 bg-teal/5 px-4 py-3.5">
+              <p className="font-mono text-[10px] tracking-widest text-teal">
+                つかいかた
+              </p>
+              <ol className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-5">
+                {tool.usageSteps.map((step, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-ink sm:flex-1">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal text-[10px] font-bold text-white">
+                      {i + 1}
+                    </span>
+                    <span className="leading-relaxed">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </div>
 
         <div className="mt-8">{children}</div>
